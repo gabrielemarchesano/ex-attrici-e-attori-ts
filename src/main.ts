@@ -68,7 +68,7 @@ async function getActress(id: number): Promise<Actress | null>{
   }
 }
 
-// Fetch actresses
+// Fetch all actresses
 async function getAllActresses(): Promise<Actress[]>{
   try{
     const response = await fetch("http://localhost:3333/actresses");
@@ -82,4 +82,14 @@ async function getAllActresses(): Promise<Actress[]>{
   }
 }
 
-getAllActresses();
+// get actresses at the same time by their ids
+async function getActresses(ids: number[]): Promise<(Actress | null)[]>{
+  try{
+    const promises = ids.map(id => getActress(id));
+    return await Promise.all(promises);
+  }
+  catch(error){
+    console.error("Errore nel recupero degli id");
+    return [];
+  }
+}
