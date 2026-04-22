@@ -67,3 +67,19 @@ async function getActress(id: number): Promise<Actress | null>{
     return null;
   }
 }
+
+// Fetch actresses
+async function getAllActresses(): Promise<Actress[]>{
+  try{
+    const response = await fetch("http://localhost:3333/actresses");
+    const data: unknown = await response.json();
+    console.log(data);
+    return data as Actress[];
+  }
+  catch(error){
+    console.error("Errore nel recupero delle attrici");
+    return [];
+  }
+}
+
+getAllActresses();
